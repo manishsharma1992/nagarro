@@ -1,0 +1,46 @@
+<p-menubar [model]="items">
+    <label>Welcome, {{username}}</label> &nbsp;&nbsp;&nbsp;&nbsp;
+    <button pButton label="Logout" icon="pi pi-power-off" (click)="logout()"></button>
+</p-menubar>
+<div class="card-container">
+    <p-card [style]="{width: '100%'}" styleClass="p-card-shadow" *ngIf="isAdminLoggedIn()">
+        <form (ngSubmit)="onSubmit()" [formGroup]="filterForm">
+            <div class="p-fluid grid formgrid">
+                <div class="field col-12 md:col-4">
+                    <label for="acctNbr">Account Id</label>
+                    <p-inputNumber formControlName="acctId"></p-inputNumber>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label for="dateRange">Date Range Picker</label>
+                    <p-calendar formControlName="dateRange" selectionMode="range" aria-readonly="true" inputId="range"></p-calendar>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label for="amountRange">Amount Range - Range: {{filterForm.get('amountRange')?.value[0] + ' - ' + filterForm.get('amountRange')?.value[1]}}</label>
+                    <p-slider formControlName="amountRange" [min]="0.000" [max]="9999.0000" [range]="true"></p-slider>
+                </div>
+                <div>
+
+                </div>
+                <button type="submit" pButton class="p-button-primary align-center">Submit</button>
+            </div>
+        </form>
+    </p-card>
+    <p-card header="Account Statements" [style]="{width: '100%'}" styleClass="p-card-shadow">
+        <p-table [columns]="columnDefs" [value]="rowData$" responsiveLayout="scroll">
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th *ngFor="let col of columns">
+                  {{col.header}}
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+              <tr>
+                <td *ngFor="let col of columns">
+                  {{rowData[col.field]}}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+    </p-card>
+</div>
