@@ -25,10 +25,10 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/nagarro-web'),
+      dir: require('path').join(__dirname, 'coverage'),
       subdir: '.',
       reporters: [
-        { type: 'html' },
+        { type: 'lcovonly', file:'lcov.info' },
         { type: 'text-summary' }
       ]
     },
@@ -37,8 +37,20 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['ChromeHeadless'],
     singleRun: false,
-    restartOnFileChange: true
+    restartOnFileChange: true,
+    customLanuchers: {
+      ChromeHeadless: {
+        base: 'Chrome',
+        flags: [
+          "--headless",
+          "--no-sandbox",
+          "--disable-setuid-sandbox",
+          "--disable-gpu",
+          "--remote-debugging-port=9222"
+        ]
+      }
+    }
   });
 };
