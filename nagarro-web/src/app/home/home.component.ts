@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
 
   isAdminLoggedIn(): boolean {
     const roles = this.user.roles;
-    const role = roles[0];
+    const role = roles[0] || '';
     if(role === 'ROLE_ADMIN') {
       return true;
     }
