@@ -29,3 +29,12 @@ replay_pid*
 .project
 nagarro-server/.classpath
 nagarro-server/.project
+target/sonar/report-task.txt
+target/sonar/.sonar_lock
+target/.DS_Store
+.DS_Store
+*.launch
+**/target/**/*
+nagarro-server/target/classes/application.properties
+nagarro-server/target/classes/META-INF/maven/com.nagarro/nagarro-server/pom.properties
+nagarro-server/target/classes/META-INF/maven/com.nagarro/nagarro-server/pom.xml
